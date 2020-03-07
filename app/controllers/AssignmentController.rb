@@ -73,7 +73,7 @@ class AssignmentController < ApplicationController
             redirect to '/login'
         end
     end
-    
+
     delete '/assignments/:id/delete' do
         @assignment = Assignment.find_by(id: params[:id])
         if logged_in? && current_student.id == @assignment.student_id
