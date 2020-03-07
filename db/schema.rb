@@ -10,12 +10,12 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_03_07_011942) do
+ActiveRecord::Schema.define(version: 2020_03_07_035759) do
 
   create_table "assignments", force: :cascade do |t|
     t.string "name"
-    t.string "class"
-    t.datetime "due_date"
+    t.string "class_name"
+    t.string "due_date"
     t.integer "student_id"
   end
 
