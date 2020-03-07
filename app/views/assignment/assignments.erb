@@ -1,0 +1,14 @@
+<h2>Here are your assignments</h2>
+<ol>
+<% @assignments.each do |assignment| %>
+    <li>
+    <a href= "/assignments/<%=assignment.id%>"><%=assignment.name%></a>
+    </li>
+<%end%>
+</ol><br>
+
+<a href='/assignments/new'>Create a New Assignment</a><br>
+<a href='/logout'>Log out</a>
+
+
+    

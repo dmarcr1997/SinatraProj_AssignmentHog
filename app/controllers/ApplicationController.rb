@@ -8,7 +8,11 @@ class ApplicationController < Sinatra::Base
     end
 
     get '/' do
-        erb :index
+        if logged_in?
+            redirect to '/assignments'
+        else
+            erb :index
+        end
     end
 
     helpers do

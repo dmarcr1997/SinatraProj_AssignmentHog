@@ -1,0 +1,14 @@
+<h2><%= @assignment.name%></h2>
+<ul>
+    <li>Class: <%=@assignment.class_name%></li>
+    <li>Due Date: <%=@assignment.due_date%></li>
+</ul>
+<form action = '/assignments/<%=@assignment.id%>/delete' method = 'POST'>
+    <input id ="hidden" type ="hidden" name='_method' value='delete'>
+    <input type='submit' value='X'>
+</form>
+<a href="/assignments/<%=@assignment.id%>/edit">Edit</a><br><br>
+<a href='/assignments'>All Assignments</a><br>
+<a href='/logout'>Log out</a>
+
+    

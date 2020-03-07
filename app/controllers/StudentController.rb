@@ -3,7 +3,7 @@ class StudentController < ApplicationController
     get '/signup' do
         if logged_in?
             puts 'signup logged in'
-            redirect to '/'
+            redirect to '/assignments'
         else
             erb :'student/signup'
         end
@@ -13,7 +13,7 @@ class StudentController < ApplicationController
         if valid?(params) && exists?(params[:username]).nil?
             @student = Student.create(username: params[:username], password: params[:password], email: params[:email])
             session[:user_id] = @student.id
-            redirect to '/'
+            redirect to '/assignments'
         elsif !valid?(params)
             puts 'invalid login haha'
             redirect to '/signup'
@@ -25,17 +25,18 @@ class StudentController < ApplicationController
     get '/login' do
         if logged_in?
             puts 'login logged in'
-            redirect to '/'
+            redirect to '/assignments'
         else
             erb :'student/login'
         end
     end
 
     post '/login' do
-        @student = Student.find_by(username: params[:username])
+        @student = Student.find_by(email: params[:email])
+        # binding.pry
         if @student && @student.authenticate(params[:password])
             session[:user_id] = @student.id
-            redirect to '/'
+            redirect to '/assignments'
         else
             puts 'invalid login from post'
             redirect to '/login'
