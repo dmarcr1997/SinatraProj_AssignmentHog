@@ -19,6 +19,19 @@ class ApplicationController < Sinatra::Base
         def current_student
             @student = Student.find(session[:user_id])
         end
+
+        def valid? (params)
+            params.each do |param|
+                if param.empty?
+                    return false
+                end
+            end
+            true
+        end
+
+        def exists?(username)
+            @student = Student.find_by(username: username)
+        end
     end
 
 end
