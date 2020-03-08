@@ -8,16 +8,24 @@ Student.create(username: "Denise", password: "myNameisDenise", email:'denise18@e
 
 Student.create(username: "Patrick", password: "myNameisPat", email:'Patrick18@email.com')
 
-Assignment.create(name: "calc ch2 derivatives", class_name: "Calculus", due_date: "01/12/20", student_id: 1)
+Assignment.create(name: "calc ch2 derivatives", class_name: "Calculus", due_date: "01/12/20", student_id: 1, stucla_id: 1)
 
-Assignment.create(name: "History Columbus", class_name: "History", due_date: "02/12/20", student_id: 1)
+Assignment.create(name: "History Columbus", class_name: "History", due_date: "02/12/20", student_id: 1, stucla_id: 2)
 
-Assignment.create(name: "Hamlet overview", class_name: "English", due_date: "01/24/20", student_id: 1)
+Assignment.create(name: "Hamlet overview", class_name: "English", due_date: "01/24/20", student_id: 1, stucla_id: 3)
 
-Assignment.create(name: 'Intro to Cells', class_name: 'Biology', due_date: "01/30/20", student_id: 1)
+Assignment.create(name: 'Intro to Cells', class_name: 'Biology', due_date: "01/30/20", student_id: 1, stucla_id: 4)
 
-Assignment.create(name: "History Columbus", class_name: "History", due_date: "02/12/20", student_id: 2)
+Assignment.create(name: "History Columbus", class_name: "History", due_date: "02/12/20", student_id: 2, stucla_id: 2)
 
-Assignment.create(name: "Hamlet overview", class_name: "English", due_date: "01/24/20", student_id: 3)
+Assignment.create(name: "Hamlet overview", class_name: "English", due_date: "01/24/20", student_id: 3, stucla_id: 3)
 
-Assignment.create(name: 'Intro to Cells', class_name: 'Biology', due_date: "01/30/20", student_id: 4)
+Assignment.create(name: 'Intro to Cells', class_name: 'Biology', due_date: "01/30/20", student_id: 4, stucla_id: 4)
+
+Stucla.create(name: 'Calculus')
+
+Stucla.create(name: 'English')
+
+Stucla.create(name: 'History')
+
+Stucla.create(name: 'Biology')

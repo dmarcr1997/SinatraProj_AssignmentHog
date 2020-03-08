@@ -36,6 +36,7 @@ class ApplicationController < Sinatra::Base
         def exists?(username)
             @student = Student.find_by(username: username)
         end
+
     end
 
 end

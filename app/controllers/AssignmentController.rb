@@ -21,7 +21,8 @@ class AssignmentController < ApplicationController
         if !valid?(params)
             redirect to '/assignments/new'
         else
-            Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id)
+            @student_class = Stucla.find_by(name: params[:class_name])
+            @assignment = Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, class_id: @student_class.id) 
             redirect to '/assignments'
         end
     end
@@ -30,6 +31,7 @@ class AssignmentController < ApplicationController
         if logged_in?
             # binding.pry
             current_student.assignments.each{|assignment| @assignment = assignment if assignment.id == params[:id].to_i } 
+            @student_class = Stucla.find_by(name: @assignment.class_name)
             if @assignment
                 erb :'assignment/show'
             else
@@ -59,7 +61,8 @@ class AssignmentController < ApplicationController
             puts 'must fill out forms completely'
             redirect to '/assignments/#{@assignment.id}/edit'
         else
-            @assignment.update(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id)
+            @student_class = Stucla.find_by(name: params[:class_name])
+            @assignment.update(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, class_id: @student_class.id)
             redirect to '/assignments/#{@assignment.id}'
         end
     end

@@ -1,6 +1,6 @@
 default: &default
   adapter: 'sqlite3'
-  database: 'db/students.sqlite'
+  database: 'db/student_cla_assignments.sqlite'
 
 development:
   <<: *default
