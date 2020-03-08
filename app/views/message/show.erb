@@ -1,7 +1,15 @@
-<% if current_student.id == @message.recipient%> 
+<% if current_student.id == @message.recipient && !@sender.nil?%> 
     <h2>Message from <%=@sender.username%></h2>
+<% elsif current_student.id == @message.recipient && @sender.nil?%>
+    <h2>Message from Unknown</h2>
 <%else%>
     <h2>Message to <%=@recipient.username%></h2>
 <%end%>
 <p><%=@message.message%></p>
+<form action = '/messages/<%=@message.id%>/delete' method = 'POST'>
+    <input id ="hidden" type ="hidden" name='_method' value='delete'>
+    <input type='submit' value='Delete'>
+</form>
+<a href='/messages'>Back to all Messages</a><br>
+<a href='/assignments'>Home</a>
 

@@ -16,13 +16,19 @@
 
 <ul>
 <%@recieved_messages.each do |mess| %>
-    <%@sender = Student.find_by(id: mess.student_id)%>
+    <% @sender = Student.find_by(id: mess.student_id) %>
     <li>
-    From:        
-    <%=@sender.username%><br>
+    <%if !@sender.nil?%>
+    From        
+    <%=@sender.username%>:<br>
+    <%else%>
+    Sender Unknown:
+    <%end%>
     <a href='/messages/<%=mess.id%>'><%=mess.message%></a>
     </li>
 <%end%>
 <br><br>
 </ul>
+<a href='/assignments'>Home</a><br>
+<a href='/logout'>Log out</a>
 

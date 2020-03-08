@@ -1,6 +1,7 @@
 class MessageController < ApplicationController
     
     get '/messages' do
+        # binding.pry
         if logged_in?
             @sent_messages = current_student.messages
             @recieved_messages = Message.all.select{|message| message.recipient == current_student.id }
@@ -58,6 +59,33 @@ class MessageController < ApplicationController
         end
     end
             
+    get '/assignments/:id/delete' do
+        if logged_in?
+            puts "can only delete with delete button"
+            redirect to '/assignments'
+        else
+            puts "cannot delete"
+            redirect to '/login'
+        end
+    end
 
+    delete '/messages/:id/delete' do
+        @message = Message.find_by(id: params[:id])
+        if logged_in? && current_student.id == @message.student_id
+            @message.student_id = nil
+            puts 'student deleted messsage'
+        elsif logged_in? && current_student.id == @message.recipient
+            @message.recipient = nil
+            puts 'recipient deleted message'
+        else
+            puts "must be logged in to delete assignments"
+            redirect to '/login'
+        end
+        if @message.student_id == nil && @message.recipient == nil
+            @message.destroy
+            puts 'message deleted'
+        end
+        redirect to '/messages'
+    end
 
 end
