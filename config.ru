@@ -8,4 +8,5 @@ use Rack::MethodOverride
 use StudentController
 use AssignmentController
 use StudentClassController
+use MessageController
 run ApplicationController
