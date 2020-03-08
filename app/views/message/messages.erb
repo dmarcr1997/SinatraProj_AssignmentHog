@@ -1,0 +1,28 @@
+<h2><%=current_student.username%>'s Messages</h2>
+<h3>Sent:</h3>
+<ul>
+<%@sent_messages.each do |mess| %>
+    <%@recipient = Student.find_by(id: mess.recipient)%>
+    <li>
+    To:        
+    <%=@recipient.username%><br>
+    <a href='/messages/<%=mess.id%>'><%=mess.message%></a>
+    </li>
+<%end%>
+</ul>
+<br><br>
+
+<h3>Recieved:</h3>
+
+<ul>
+<%@recieved_messages.each do |mess| %>
+    <%@sender = Student.find_by(id: mess.student_id)%>
+    <li>
+    From:        
+    <%=@sender.username%><br>
+    <a href='/messages/<%=mess.id%>'><%=mess.message%></a>
+    </li>
+<%end%>
+<br><br>
+</ul>
+

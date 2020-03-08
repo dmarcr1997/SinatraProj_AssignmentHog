@@ -1,0 +1,7 @@
+<% if current_student.id == @message.recipient%> 
+    <h2>Message from <%=@sender.username%></h2>
+<%else%>
+    <h2>Message to <%=@recipient.username%></h2>
+<%end%>
+<p><%=@message.message%></p>
+
