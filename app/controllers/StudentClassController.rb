@@ -1,7 +1,7 @@
 class StudentClassController < ApplicationController 
     get '/studentclasses' do 
         if logged_in?
-            @studentclasses = current_student.studentclasses.all
+            @studentclasses = current_student.stuclas.all
             erb :'studentclass/studentclasses'
         else
             puts 'must be logged in to view classes'
@@ -13,6 +13,7 @@ class StudentClassController < ApplicationController
         if logged_in? 
             @studentclass = Stucla.find_by(id: params[:id])
             if @studentclass
+                @students = @studentclass.students.all
                 erb :'studentclass/classshow'
             else
                 puts "You are not apart of that class"

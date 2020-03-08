@@ -1,0 +1,10 @@
+<h2><%=@studentclass.name%></h2>
+<h3>Roster</h3>
+    <% @studentclass.students.each do |student| %> 
+        <p>
+        <%=student.username%> 
+        <% if student != current_student %>
+            <a href=''>Message</a>
+        <%end%>
+        </p>
+    <%end%>

@@ -1,0 +1,9 @@
+<h2><%=@student.username%>'s classes</h2>
+<ul>
+<% @studentclasses.each do |stclass| %>
+    <li>
+    <a href = "/studentclasses/<%=stclass.id%>"><%=stclass.name%>: </a><br>
+    Assignments: <%= @student.assignments.select{|hw| stclass.id == hw.stucla_id}.count%>
+    </li>
+<%end%>
+</ul>
