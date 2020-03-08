@@ -22,7 +22,12 @@ class AssignmentController < ApplicationController
             redirect to '/assignments/new'
         else
             @student_class = Stucla.find_by(name: params[:class_name])
-            @assignment = Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, class_id: @student_class.id) 
+            if @student_class
+                @assignment = Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, stucla_id: @student_class.id) 
+            else
+                @student_class = Stucla.create(name: params[:class_name])
+                @assignment = Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, class_id: @student_class.id) 
+            end
             redirect to '/assignments'
         end
     end
