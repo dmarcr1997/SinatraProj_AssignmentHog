@@ -1,16 +1,16 @@
 <h2>Here are your assignments</h2>
-<ol>
+<ul>
 <% @assignments.each do |assignment| %>
     <li>
     <a href= "/assignments/<%=assignment.id%>"><%=assignment.name%></a>
     </li>
 <%end%>
-</ol><br>
+</ul><br>
 
-<a href='/assignments/new'>Create a New Assignment</a><br>
-<a href='/studentclasses'>My Class Rosters</a><br>
-<a href='/messages'>Messages</a><br>
-<a href='/logout'>Log out</a>
+<a class='nav' href='/assignments/new'>Create a New Assignment</a><br>
+<a class='nav' href='/studentclasses'>My Class Rosters</a><br>
+<a class='nav' href='/messages'>Messages</a><br>
+<a class='nav' href='/logout'>Log out</a>
 
 
     
