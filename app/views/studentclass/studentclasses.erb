@@ -1,3 +1,11 @@
+<header class='second'>
+<ul class='navbar'>
+<li><a class='nav' href='/assignments'>Home</a></li>
+<li><a class='nav' href='/messages/new'>Message a Classmate</a></li>
+<li><a class='nav' href='/studentclasses'>Class Rosters</a></li>
+<li><a class='nav' href='/logout'>Log out</a></li>
+</ul>
+</header>
 <h2><%=@student.username%>'s classes</h2>
 <ul>
 <% @studentclasses.each do |stclass| %>
@@ -7,3 +15,4 @@
     </li>
 <%end%>
 </ul>
+

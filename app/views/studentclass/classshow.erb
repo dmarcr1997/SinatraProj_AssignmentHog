@@ -1,3 +1,12 @@
+<header class='second'>
+<ul class='navbar'>
+<li><a class='nav' href='/assignments'>Home</a></li>
+<li><a class='nav' href='/messages/new'>Message a Classmate</a></li>
+<li><a class='nav' href='/studentclasses'>Class Rosters</a></li>
+<li><a class='nav' href='/logout'>Log out</a></li>
+</ul>
+</header>
+
 <h2><%=@studentclass.name%></h2>
 <h3>Roster</h3>
     <% @studentclass.students.each do |student| %> 
@@ -7,4 +16,4 @@
         <%end%>
         </p>
     <%end%>
-    <a class='nav' href='/messages/new'>Message a Classmate</a>
+   

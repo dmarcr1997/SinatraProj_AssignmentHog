@@ -1,3 +1,12 @@
+<header class='second'>
+<ul class='navbar'>
+<li><a class='nav' href='/assignments'>Home</a></li>
+<li><a class='nav' href="/assignments/<%=@assignment.id%>/edit">Edit</a></li>
+<li><a class='nav' href='/studentclasses'>My Class Rosters</a></li>
+<li><a class='nav' href='/messages'>Messages</a></li>
+<li><a class='nav' href='/logout'>Log out</a></li>
+</ul>
+</header>
 <h2><%= @assignment.name%></h2>
 <ul>
     <li>Class: <a href= "/studentclasses/<%=@student_class.id%>"><%=@assignment.class_name%></li></a>
@@ -7,8 +16,6 @@
     <input id ="hidden" type ="hidden" name='_method' value='delete'>
     <input type='submit' value='Delete'>
 </form>
-<a class='nav' href="/assignments/<%=@assignment.id%>/edit">Edit</a><br>
-<a class='nav' href='/assignments'>All Assignments</a><br>
-<a class='nav' href='/logout'>Log out</a>
+
 
     
