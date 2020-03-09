@@ -8,6 +8,7 @@
 </header>
 <% if current_student.id == @message.recipient && !@sender.nil?%> 
     <h2>Message from <%=@sender.username%></h2>
+    <h3><a href='/messages/<%=@sender.id%>/new'>Reply</a></h3>
 <% elsif current_student.id == @message.recipient && @sender.nil?%>
     <h2>Message from Unknown</h2>
 <%else%>

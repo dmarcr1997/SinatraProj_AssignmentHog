@@ -1,0 +1,11 @@
+<h2>New Message to <%=@recipient.username%></h2>
+
+<form action='/messages' method='POST'>
+    <input id="hidden" type="hidden" name="recipient" value="<%=@recipient.username%>">
+    <p>
+    <label for='message'>Message:</label>
+    <textarea type='textarea' name='message' placeholder='Your Message Here' required></textarea>
+    </p>
+
+    <input type ='submit' value='Send'>
+</form>

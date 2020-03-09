@@ -22,6 +22,7 @@ class MessageController < ApplicationController
     end
 
     post '/messages' do
+        # binding.pry
         if !valid?(params)
             puts 'invalid message'
             redirect to '/messages/new'
@@ -58,24 +59,27 @@ class MessageController < ApplicationController
             redirect to '/login'
         end
     end
-            
-    get '/assignments/:id/delete' do
+
+    get '/messages/:id/new' do
         if logged_in?
-            puts "can only delete with delete button"
-            redirect to '/assignments'
+            @recipient = Student.find_by(id: params[:id])
+            erb :'message/new_to'
         else
-            puts "cannot delete"
+            puts 'must be logged in to reply to messages'
             redirect to '/login'
         end
-    end
 
+    end
+    
     delete '/messages/:id/delete' do
         @message = Message.find_by(id: params[:id])
         if logged_in? && current_student.id == @message.student_id
             @message.student_id = nil
+            @message.save
             puts 'student deleted messsage'
         elsif logged_in? && current_student.id == @message.recipient
             @message.recipient = nil
+            @message.save
             puts 'recipient deleted message'
         else
             puts "must be logged in to delete assignments"

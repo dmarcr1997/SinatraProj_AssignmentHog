@@ -1,7 +1,7 @@
 class StudentClassController < ApplicationController 
     get '/studentclasses' do 
         if logged_in?
-            @studentclasses = current_student.stuclas.all
+            @studentclasses = current_student.stuclas.all.uniq
             erb :'studentclass/studentclasses'
         else
             puts 'must be logged in to view classes'
