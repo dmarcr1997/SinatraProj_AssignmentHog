@@ -6,10 +6,12 @@ class ApplicationController < Sinatra::Base
        
         enable :sessions
         set :session_secret, '7951421369402092809452156185262943623267768116687709700779886'
+        register Sinatra::Flash
     end
 
     get '/' do
         if logged_in?
+            flash[:error] = "You are already logged in"
             redirect to '/assignments'
         else
             erb :index
