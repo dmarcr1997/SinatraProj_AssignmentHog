@@ -7,7 +7,7 @@ class MessageController < ApplicationController
             @recieved_messages = Message.all.select{|message| message.recipient == current_student.id }
             erb :'message/messages'
         else
-            puts 'must be logged in to view messages'
+            flash[:error] = 'Must be logged in to view messages.'
             redirect to  '/login'
         end
     end
@@ -16,7 +16,7 @@ class MessageController < ApplicationController
         if logged_in?
             erb :'message/new'
         else
-            puts 'must be logged in to create messages'
+            flash[:error] = 'Must be logged in to create messages.'
             redirect to  '/login'
         end
     end
@@ -24,7 +24,7 @@ class MessageController < ApplicationController
     post '/messages' do
         # binding.pry
         if !valid?(params)
-            puts 'invalid message'
+            flash[:error] = 'Fill out all message fields.'
             redirect to '/messages/new'
         else    
             if exists?(params[:recipient])
@@ -33,9 +33,8 @@ class MessageController < ApplicationController
                 current_student.save
                 redirect to '/messages'
             else
-                puts 'no user by that name'
-                redirect to
-                '/messages/new'
+                flash[:error] = 'No user by that name.'
+                redirect to '/messages/new'
             end
         end
     end
@@ -43,6 +42,10 @@ class MessageController < ApplicationController
     get '/messages/:id' do
         if logged_in?
             @message = Message.find_by(id: params[:id])
+            if @message.nil?
+                flash[:error] = "Cannot find message"
+                redirect to '/messages'
+            end
             if current_student.id == @message.student_id 
                 @student = current_student
                 @recipient = Student.find_by(id: @message.recipient)
@@ -51,11 +54,11 @@ class MessageController < ApplicationController
                 @sender = Student.find_by(id: @message.student_id)
                 erb :'message/show'   
             else
-                puts 'message does not belong to you'
+                flash[:error] = 'That message does not belong to you.'
                 redirect to '/messages'
             end
         else
-            puts 'must be logged in to view messages'
+            flash[:error] = 'Must be logged in to view messages.'
             redirect to '/login'
         end
     end
@@ -65,7 +68,7 @@ class MessageController < ApplicationController
             @recipient = Student.find_by(id: params[:id])
             erb :'message/new_to'
         else
-            puts 'must be logged in to reply to messages'
+            flash[:error] = 'Must be logged in to reply to messages.'
             redirect to '/login'
         end
 
@@ -76,18 +79,17 @@ class MessageController < ApplicationController
         if logged_in? && current_student.id == @message.student_id
             @message.student_id = nil
             @message.save
-            puts 'student deleted messsage'
+            flash[:status] = 'Message Deleted'
         elsif logged_in? && current_student.id == @message.recipient
             @message.recipient = nil
             @message.save
-            puts 'recipient deleted message'
+            flash[:status] = 'Message Deleted'
         else
-            puts "must be logged in to delete assignments"
+            flash[:error] = "Must be logged in to delete assignments."
             redirect to '/login'
         end
         if @message.student_id == nil && @message.recipient == nil
             @message.destroy
-            puts 'message deleted'
         end
         redirect to '/messages'
     end

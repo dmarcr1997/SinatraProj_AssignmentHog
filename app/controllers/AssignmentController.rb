@@ -4,6 +4,7 @@ class AssignmentController < ApplicationController
             @assignments = current_student.assignments
             erb :'assignment/assignments'
         else
+            flash[:error] = "Must be logged in to access assignments."
             redirect to '/login'
         end
     end
@@ -12,13 +13,14 @@ class AssignmentController < ApplicationController
         if logged_in?
             erb :'assignment/new'
         else
-            puts "not logged in cannot create assignment"
+            flash[:error] = "Must be logged in to create an assignments"
             redirect to '/login'
         end
     end
 
     post '/assignments' do
         if !valid?(params)
+            flash[:error] = "Invalid assignment. Please fill out all fields."
             redirect to '/assignments/new'
         else
             @student_class = Stucla.find_by(name: params[:class_name])
@@ -38,9 +40,11 @@ class AssignmentController < ApplicationController
             if @assignment
                 erb :'assignment/show'
             else
+                flash[:error] = "Cannot find that assignment."
                 redirect to '/assignments'
             end
         else
+            flash[:error] = "Must be logged in to view assignments."
             redirect to '/login'
         end
     end
@@ -50,10 +54,10 @@ class AssignmentController < ApplicationController
         if logged_in? && current_student.id == @assignment.student_id
             erb :'assignment/edit'
         elsif logged_in? && current_student.id != @assignment.student_id
-            puts "cannot edit other students assignments"
+            flash[:error] = "Cannot edit other students assignments."
             redirect to '/assignments'
         else
-            puts "must be logged in to edit assignments"
+            flash[:error] = "Must be logged in to edit assignments."
             redirect to '/login'
         end
     end
@@ -61,7 +65,7 @@ class AssignmentController < ApplicationController
     patch '/assignments' do
         @assignment = Assignment.find_by(name: params[:name])
         if !valid?(params)
-            puts 'must fill out forms completely'
+            flash[:error] = 'Must fill out form completely.'
             redirect to '/assignments/#{@assignment.id}/edit'
         else
             @student_class = Stucla.find_by(name: params[:class_name])
@@ -72,10 +76,10 @@ class AssignmentController < ApplicationController
 
     get '/assignments/:id/delete' do
         if logged_in?
-            puts "can only delete with delete button"
+            flash[:error] = "Can only delete with delete button."
             redirect to '/assignments'
         else
-            puts "cannot delete"
+            flash[:error] = "Must be logged in to delete."
             redirect to '/login'
         end
     end
@@ -86,10 +90,10 @@ class AssignmentController < ApplicationController
             @assignment.destroy
             redirect to '/assignments'
         elsif logged_in? && current_student.id != @assignment.student_id
-            puts "cannot delete other students assignments"
+            flag[:error] = "Cannot delete other students assignments."
             redirect to '/assignments'
         else
-            puts "must be logged in to delete assignments"
+            flag[:error] = "Must be logged in to delete assignments."
             redirect to '/login'
         end
     end

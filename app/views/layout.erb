@@ -10,15 +10,17 @@
 <h1>Assignment Hog</h1>
 </header>
 
+
+
 <div class='wrapper'>
 
 <%  flash.keys.each do |type| %>
+        <div class='alert'>
         <div data-alert class="flash <%= type %> alert-box radius">
           <%= flash[type] %>
           <span class="closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
         </div>
 <% end %>
-
 <%=yield %>
 
 <footer class="branding">
