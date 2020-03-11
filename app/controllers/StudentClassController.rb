@@ -1,10 +1,10 @@
 class StudentClassController < ApplicationController 
     get '/studentclasses' do 
         if logged_in?
-            @studentclasses = current_student.stuclas.all.uniq
+            @studentclasses = current_student.stuclas.all
             erb :'studentclass/studentclasses'
         else
-            puts 'must be logged in to view classes'
+            flash[:error] = 'Must be logged in to view classes.'
             redirect to '/assignments'
         end
     end
@@ -16,11 +16,11 @@ class StudentClassController < ApplicationController
                 @students = @studentclass.students.all
                 erb :'studentclass/classshow'
             else
-                puts "You are not apart of that class"
+                flash[:error] = "You are not apart of that class."
                 redirect to '/studentclasses'
             end
         else
-            puts "must be logged in to view classes"
+            flash[:error] = "Must be logged in to view classes."
             redirect to '/login'
         end
     end

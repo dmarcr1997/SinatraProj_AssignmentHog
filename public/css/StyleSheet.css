@@ -90,8 +90,6 @@
       width: 85%;
    }
 
-
-
    h1{
       font-family: 'Courier New', Courier, monospace;
       font-size: 40px;
@@ -114,8 +112,6 @@
       margin-bottom: 18px;
     }
   
-
-
    div.wrapper .nav{
       background-color: orange;
       color: white;
@@ -132,7 +128,7 @@
       color:beige;
    }
 
-   div.wrapper input[type=text] {
+   div.wrapper input[type=text], div.wrapper input[type=email], div.wrapper input[type=password] {
       width: 100%;
       padding: 12px 20px;
       margin: 8px 0;
@@ -141,7 +137,7 @@
       border-radius: 4px;
       box-sizing: border-box;
    }
-   
+
    div.wrapper textarea {
       width: 100%;
       padding: 12px 20px;

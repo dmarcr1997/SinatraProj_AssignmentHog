@@ -9,9 +9,16 @@
 </header>
 <h2>Here are your assignments</h2>
 <ul>
+<%if !!@assignments[0]%>
 <% @assignments.each do |assignment| %>
     <li>
     <a href= "/assignments/<%=assignment.id%>"><%=assignment.name%></a>
+    </li>
+<%end%>
+<%else%>
+    <li>
+    Nothing to see here 
+    <a href= "/assignments/new">Create a new assignment</a>
     </li>
 <%end%>
 </ul><br>

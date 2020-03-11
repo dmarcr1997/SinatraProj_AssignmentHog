@@ -98,6 +98,4 @@ class AssignmentController < ApplicationController
         end
     end
 
-
-
 end

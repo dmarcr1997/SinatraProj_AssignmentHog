@@ -2,7 +2,7 @@ class StudentController < ApplicationController
 
     get '/signup' do
         if logged_in?
-            puts 'signup logged in'
+            flash[:error] = "You already have an account."
             redirect to '/assignments'
         else
             erb :'student/signup'
@@ -15,16 +15,17 @@ class StudentController < ApplicationController
             session[:user_id] = @student.id
             redirect to '/assignments'
         elsif !valid?(params)
-            puts 'invalid login haha'
+            flash[:error] = 'Invalid Sign up. Fill out all forms.'
             redirect to '/signup'
         else
+            flash[:error] = "There is already a student with that username."
             redirect to '/login'
         end
     end
 
     get '/login' do
         if logged_in?
-            puts 'login logged in'
+            flash[:error] = 'You are already logged in.'
             redirect to '/assignments'
         else
             erb :'student/login'
@@ -38,7 +39,7 @@ class StudentController < ApplicationController
             session[:user_id] = @student.id
             redirect to '/assignments'
         else
-            puts 'invalid login from post'
+            flash[:error] = 'Wrong Combination of Username and Password.'
             redirect to '/login'
         end
     end
@@ -48,8 +49,8 @@ class StudentController < ApplicationController
             session.clear
             redirect to '/login'
         else
+            flash[:error] = "You are not logged in."
             redirect to '/'
         end
     end
-
 end
