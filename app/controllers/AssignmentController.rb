@@ -27,7 +27,7 @@ class AssignmentController < ApplicationController
             if @student_class.nil?
                 @student_class = Stucla.create(name: params[:class_name])     
             end
-            @assignment = Assignment.create(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, stucla_id: @student_class.id)
+            @assignment = Assignment.create(name: params[:name], due_date: params[:due_date], student_id: current_student.id, stucla_id: @student_class.id)
             @student_class.save
             redirect to '/assignments'
         end
@@ -36,7 +36,7 @@ class AssignmentController < ApplicationController
     get '/assignments/:id' do
         if logged_in?
             current_student.assignments.each{|assignment| @assignment = assignment if assignment.id == params[:id].to_i } 
-            @student_class = Stucla.find_by(name: @assignment.class_name)
+            @student_class = Stucla.find_by(id: @assignment.stucla_id)
             if @assignment
                 erb :'assignment/show'
             else
@@ -69,7 +69,7 @@ class AssignmentController < ApplicationController
             redirect to '/assignments/#{@assignment.id}/edit'
         else
             @student_class = Stucla.find_by(name: params[:class_name])
-            @assignment.update(name: params[:name], class_name: params[:class_name], due_date: params[:due_date], student_id: current_student.id, class_id: @student_class.id)
+            @assignment.update(name: params[:name], due_date: params[:due_date], student_id: current_student.id, stucla_id: @student_class.id)
             redirect to '/assignments/#{@assignment.id}'
         end
     end

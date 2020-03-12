@@ -9,7 +9,7 @@
 </header>
 <h2><%= @assignment.name%></h2>
 <ul>
-    <li>Class: <a href= "/studentclasses/<%=@student_class.id%>"><%=@assignment.class_name%></li></a>
+    <li>Class: <a href= "/studentclasses/<%=@student_class.id%>"><%=@student_class.name%></li></a>
     <li>Due Date: <%=@assignment.due_date%></li>
 </ul>
 <form action = '/assignments/<%=@assignment.id%>/delete' method = 'POST'>
