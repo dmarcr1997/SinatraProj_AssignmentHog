@@ -1,13 +1,15 @@
 <h2>Edit Assignment</h2>
 <ul>
 <li><h3><%=@assignment.name%></h3>
-<li>Class: <%=@assignment.class_name%></li>
+<li>Class: <%=@student_class.name%></li>
 <li>Due Date: <%=@assignment.due_date%></li>
 </ul>
 <br><br>
 
 <form action='/assignments' method='POST'>
-    <input id ="hidden" type ="hidden" name='_methood' value='patch'>
+    <input id ="hidden" type ="hidden" name='_method' value='patch'>
+    <input id ="hidden" type="hidden" name="class_id" value="<%=@student_class.id%>">
+    <input id ="hidden" type="hidden" name="assign_id" value="<%=@assignment.id%>">
     <p>
     <label for='class_name'>Class Name</label>
     <input type ='text' name='class_name' placeholder='Class' required>

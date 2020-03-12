@@ -36,6 +36,10 @@ class AssignmentController < ApplicationController
     get '/assignments/:id' do
         if logged_in?
             current_student.assignments.each{|assignment| @assignment = assignment if assignment.id == params[:id].to_i } 
+            if @assignment.nil?
+                flash[:error] = "Cannot find that assignment."
+                redirect to '/assignments'
+            end
             @student_class = Stucla.find_by(id: @assignment.stucla_id)
             if @assignment
                 erb :'assignment/show'
@@ -51,6 +55,7 @@ class AssignmentController < ApplicationController
 
     get '/assignments/:id/edit' do
         @assignment = Assignment.find_by(id: params[:id])
+        @student_class=Stucla.find_by(id: @assignment.stucla_id)
         if logged_in? && current_student.id == @assignment.student_id
             erb :'assignment/edit'
         elsif logged_in? && current_student.id != @assignment.student_id
@@ -63,14 +68,15 @@ class AssignmentController < ApplicationController
     end
 
     patch '/assignments' do
-        @assignment = Assignment.find_by(name: params[:name])
+        # binding.pry
+        @assignment = Assignment.find_by(id: params[:assign_id])
         if !valid?(params)
             flash[:error] = 'Must fill out form completely.'
-            redirect to '/assignments/#{@assignment.id}/edit'
+            redirect to "/assignments/#{@assignment.id}/edit"
         else
-            @student_class = Stucla.find_by(name: params[:class_name])
+            @student_class = Stucla.find_by(id: params[:class_id])
             @assignment.update(name: params[:name], due_date: params[:due_date], student_id: current_student.id, stucla_id: @student_class.id)
-            redirect to '/assignments/#{@assignment.id}'
+            redirect to "/assignments/#{@assignment.id}"
         end
     end
 
