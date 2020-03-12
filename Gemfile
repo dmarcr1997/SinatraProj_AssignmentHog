@@ -15,6 +15,7 @@ gem 'pry'
 gem 'bcrypt'
 gem 'tux'
 gem 'sinatra-flash'
+gem 'dotenv'
 
 group :test do
     gem 'rspec'
