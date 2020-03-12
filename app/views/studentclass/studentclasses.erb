@@ -7,7 +7,7 @@
 </ul>
 </header>
 <h2><%=@student.username%>'s classes</h2>
-<ul>
+<ul class = 'list'>
 <% @studentclasses.each do |stclass| %>
     <li>
     <a href = "/studentclasses/<%=stclass.id%>"><%=stclass.name%>: </a><br>

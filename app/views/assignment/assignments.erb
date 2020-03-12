@@ -8,11 +8,12 @@
 </ul>
 </header>
 <h2>Here are your assignments</h2>
-<ul>
+<ul class = 'list'>
 <%if !!@assignments[0]%>
 <% @assignments.each do |assignment| %>
     <li>
-    <a href= "/assignments/<%=assignment.id%>"><%=assignment.name%></a>
+    <a href= "/assignments/<%=assignment.id%>"><%=assignment.name%></a><br>
+    Due: <%=assignment.due_date%>
     </li>
 <%end%>
 <%else%>
